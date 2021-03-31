@@ -1,0 +1,106 @@
+<head>
+	<title>How to use Toastr</title>
+	<!-- jQuery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- Toastr -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+	<!-- Styles -->
+	<style type="text/css">
+		body {background: whitesmoke;text-align: center;}
+		button{background-color: darkslategrey;color: white;border: 0;font-size: 18px;font-weight: 500;border-radius: 7px;padding: 10px 10px;cursor: pointer;white-space: nowrap;}
+		#success{background: green;}
+		#error{background: red;}
+		#warning{background: coral;}
+		#info{background: cornflowerblue;}
+		#question{background: grey;}
+	</style>
+</head>
+<body>
+	<div>
+		<h1>How to use <b>Toastr</b></h1>
+		<div>
+			<h4>Popup Type</h4>
+			<p>Toastr have 4 popup type and the different is icon and background</p>
+			<button id="success" >Success</button>
+			<button id="info" >Info</button>
+			<button id="error" >Error</button>
+			<button id="warning">Warning</button>
+		</div>
+		<br>
+		<div>
+			<h4>Image and Loading</h4>
+			<p>Popup notification with image and progress bar</p>
+			<button id="image">Image and Loading</button>
+		</div>
+		<br>
+		<div>
+			<h4>Position</h4>
+			<p>There is 8 Toastr position support</p>
+			<p>
+			<form id="positionForm">
+				<input type="radio" name="position" value="top-left" checked>Top Left
+				<input type="radio" name="position" value="top-center">Top Center
+				<input type="radio" name="position" value="top-right">Top Right
+				<input type="radio" name="position" value="top-full-width">Top Full Width
+				<input type="radio" name="position" value="bottom-left">Bottom Left
+				<input type="radio" name="position" value="bottom-center">Bottom center
+				<input type="radio" name="position" value="bottom-right">Bottom right
+				<input type="radio" name="position" value="bottom-full-width">Bottom Full Width
+			</form>
+			</p>
+			<button id="position">Show Toast</button>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	// Default Configuration
+		$(document).ready(function() {
+			toastr.options = {
+				'closeButton': true,
+				'debug': false,
+				'newestOnTop': false,
+				'progressBar': false,
+				'positionClass': 'toast-top-right',
+				'preventDuplicates': false,
+				'showDuration': '1000',
+				'hideDuration': '1000',
+				'timeOut': '5000',
+				'extendedTimeOut': '1000',
+				'showEasing': 'swing',
+				'hideEasing': 'linear',
+				'showMethod': 'fadeIn',
+				'hideMethod': 'fadeOut',
+			}
+		});
+
+	// Toast Type
+		$('#success').click(function(event) {
+			toastr.success('You clicked Success toast');
+		});
+		$('#info').click(function(event) {
+			toastr.info('You clicked Info toast')
+		});
+		$('#error').click(function(event) {
+			toastr.error('You clicked Error Toast')
+		});
+		$('#warning').click(function(event) {
+			toastr.warning('You clicked Warning Toast')
+		});
+
+	// Toast Image and Progress Bar
+		$('#image').click(function(event) {
+			toastr.options.progressBar = true,
+			toastr.info('<img src="https://image.flaticon.com/icons/svg/34/34579.svg" style="width:150px;">', 'Toast Image')
+		});
+
+
+	// Toast Position
+		$('#position').click(function(event) {
+			var pos = $('input[name=position]:checked', '#positionForm').val();
+			toastr.options.positionClass = "toast-" + pos;
+			toastr.options.preventDuplicates = false;
+			toastr.info('This sample position', 'Toast Position')
+		});
+	</script>
+</body>
